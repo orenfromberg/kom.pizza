@@ -1,5 +1,4 @@
 import React from 'react';
-
 import ConnectButton from './btn_strava_connectwith_orange.svg';
 const client_id = process.env.REACT_APP_CLIENT_ID;
 const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
