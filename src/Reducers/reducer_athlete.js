@@ -1,9 +1,10 @@
-import { FETCH_TOKEN } from '../Actions/index';
+import { 
+    FETCH_ATHLETE } from '../Actions/index';
 
 export default (state = {}, action) => {
     switch(action.type) {
-        case FETCH_TOKEN:
-            return action.payload.data.athlete;
+        case FETCH_ATHLETE:
+            return action.payload.data;
         default:
             return state;
     }

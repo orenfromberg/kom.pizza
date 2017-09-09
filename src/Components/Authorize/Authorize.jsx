@@ -22,7 +22,6 @@ class Authorize extends Component {
         const { token } = this.props;
 
         if (token) {
-            localStorage.setItem('token', token);
             return (
                 <Redirect to={{
                     pathname: '/',

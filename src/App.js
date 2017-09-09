@@ -1,28 +1,11 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import {
   Route,
-  Redirect
+  withRouter
 } from 'react-router-dom';
 
-import { Home, Authorize, Connect } from './Components';
-
-const isAuthenticated = () => {
-  const token = localStorage.getItem('token');
-  return token ? true : false;
-}
-
-const PrivateRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    isAuthenticated() ? (
-      <Component {...props}/>
-    ) : (
-      <Redirect to={{
-        pathname: '/connect',
-        state: { from: props.location }
-      }}/>
-    )
-  )}/>
-)
+import { Home, Authorize, Connect, PrivateRoute } from './Components';
 
 class App extends Component {
   render() {
@@ -30,7 +13,7 @@ class App extends Component {
       <div>
         <h1>kom.pizza</h1>
         <h1><span role="img" aria-label="kom.pizza">👑⛰️.🍕</span></h1>
-        <PrivateRoute exact path="/" component={Home} />
+        <PrivateRoute exact path="/" token={this.props.token} component={Home} />
         <Route path="/connect" component={Connect} />
         <Route path="/authorize" component={Authorize} />
       </div>
@@ -38,4 +21,6 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(connect((state) => ({
+  token: state.token
+}), null)(App));

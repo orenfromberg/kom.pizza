@@ -1,17 +1,34 @@
-import React from 'react';
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAthlete } from '../../Actions/index';
+import { withRouter } from 'react-router';
 
-const Home = () => {
+class Home extends Component {
+    componentWillMount() {
+        if (this.props.token && this.props.athlete.firstname === undefined)
+            this.props.fetchAthlete(this.props.token);
+    }
 
-    return (
-        <div>
-            <h1>Welcome, you are authorized.</h1>
-            {/* <h1>kom.pizza</h1>
-            <h1><span role="img" aria-label="kom.pizza">👑⛰️.🍕</span></h1>
-            <a href={`https://www.strava.com/oauth/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force`}>
-                <img src={ConnectButton} alt="Connect with Strava" />
-            </a> */}
-        </div>
-    )
-}
+    render() {
+        let { athlete } = this.props;
 
-export default Home;
+        if (athlete) {
+            return (
+                <div>
+                    <h1>Welcome, {athlete.firstname}.</h1>
+                </div>
+            );
+        }
+
+        return (
+            <div />
+        );
+    }
+};
+
+export default withRouter(connect((state) => ({
+    token: state.token,
+    athlete: state.athlete
+}), (dispatch) => ({
+    fetchAthlete: (token) => (dispatch(fetchAthlete(token)))
+}))(Home));
