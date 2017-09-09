@@ -8,7 +8,7 @@ import { fetchToken } from '../../Actions/index';
 const urlPropsQueryConfig = {
     code: { type: UrlQueryParamTypes.string }
 }
-class Authenticate extends Component {
+class Authorize extends Component {
     static propTypes = {
         code: PropTypes.string,
     }
@@ -38,4 +38,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ fetchToken }, dispatch);
 }
 
-export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(Authenticate));
+export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(Authorize));
