@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
 import { fetchToken } from '../../Actions/index';
+import { Redirect, withRouter } from 'react-router-dom';
 
 const urlPropsQueryConfig = {
     code: { type: UrlQueryParamTypes.string }
@@ -18,12 +19,20 @@ class Authorize extends Component {
     }
 
     render() {
-        // redirect to athlete page
-        const { token, athlete } = this.props;
+        const { token } = this.props;
+
+        if (token) {
+            localStorage.setItem('token', token);
+            return (
+                <Redirect to={{
+                    pathname: '/',
+                    state: { from: this.props.location }
+                }} />
+            );
+        }
+
         return (
             <div>
-                <h1>{token}</h1>
-                <h1>{athlete && athlete.firstname}</h1>
             </div>
         )
     }
@@ -38,4 +47,4 @@ const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({ fetchToken }, dispatch);
 }
 
-export default addUrlProps({ urlPropsQueryConfig })(connect(mapStateToProps, mapDispatchToProps)(Authorize));
+export default addUrlProps({ urlPropsQueryConfig })(withRouter(connect(mapStateToProps, mapDispatchToProps)(Authorize)));
