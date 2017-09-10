@@ -3,6 +3,25 @@ import axios from 'axios';
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const FETCH_ATHLETE = 'FETCH_ATHLETE';
 export const SET_IS_READY = 'SET_IS_READY';
+export const LOGOUT = 'LOGOUT';
+
+export const logout = (token) => {
+    debugger;
+    const request = axios({
+        method: 'POST',
+        url: 'https://www.strava.com/oauth/deauthorize',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    return {
+        type: LOGOUT,
+        payload: request
+    }
+}
 
 export const setIsReady = () => ({
     type: SET_IS_READY,

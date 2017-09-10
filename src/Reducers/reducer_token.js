@@ -1,4 +1,4 @@
-import { FETCH_TOKEN } from '../Actions/index';
+import { FETCH_TOKEN, LOGOUT } from '../Actions/index';
 import { REHYDRATE } from 'redux-persist/constants';
 
 export default (state = null, action) => {
@@ -7,6 +7,8 @@ export default (state = null, action) => {
             return action.payload.token ? action.payload.token : state;
         case FETCH_TOKEN:
             return action.payload.data.access_token;
+        case LOGOUT:
+            return (action.payload.data.access_token === state) ? null : state;
         default:
             return state;
     }

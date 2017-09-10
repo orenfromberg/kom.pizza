@@ -1,6 +1,7 @@
 import React from 'react';
 import { Redirect, Route , withRouter } from 'react-router';
 import { connect } from 'react-redux';
+import { Logout } from '../index';
 
 const PrivateRoute = (props) => {
     const { component: Component, ...rest } = props;
@@ -12,7 +13,10 @@ const PrivateRoute = (props) => {
     return (
         <Route {...rest} render={props => (
             isAuthenticated() ? (
-                <Component {...props} />
+                <div>
+                    <Logout />
+                    <Component {...props} />
+                </div>
             ) : (
                     <Redirect to={{
                         pathname: '/connect',
