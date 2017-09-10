@@ -25,5 +25,4 @@ const PrivateRoute = (props) => {
 
 export default withRouter(connect((state) => ({
     token: state.token
-}), (dispatch) => ({
-}))(PrivateRoute));
+}), null)(PrivateRoute));

@@ -2,6 +2,12 @@ import axios from 'axios';
 
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const FETCH_ATHLETE = 'FETCH_ATHLETE';
+export const SET_IS_READY = 'SET_IS_READY';
+
+export const setIsReady = () => ({
+    type: SET_IS_READY,
+    payload: true
+})
 
 export const fetchToken = (code) => {
     const request = axios({

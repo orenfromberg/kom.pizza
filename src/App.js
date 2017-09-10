@@ -9,6 +9,9 @@ import { Home, Authorize, Connect, PrivateRoute } from './Components';
 
 class App extends Component {
   render() {
+    if (!this.props.isReady)
+      return <div />;
+
     return (
       <div>
         <h1>kom.pizza</h1>
@@ -22,5 +25,6 @@ class App extends Component {
 }
 
 export default withRouter(connect((state) => ({
-  token: state.token
+  token: state.token,
+  isReady: state.isReady
 }), null)(App));

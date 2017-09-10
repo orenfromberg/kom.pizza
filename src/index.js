@@ -1,20 +1,35 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
 import {
     BrowserRouter as Router,
 } from 'react-router-dom';
 import { RouterToUrlQuery } from 'react-url-query';
 import App from './App';
-import reducers from './Reducers'
+import reducer from './Reducers'
 import './index.css';
 
-const createStoreWithMiddleware = applyMiddleware(ReduxPromise)(createStore);
+import { persistStore, autoRehydrate } from 'redux-persist';
+import { setIsReady } from './Actions/index';
+
+const store = createStore(
+    reducer, 
+    compose(
+        applyMiddleware(ReduxPromise),
+        autoRehydrate({
+            // log: true
+        })
+    )
+);
+
+persistStore(store, { blacklist: ['isReady']}, () => {
+    store.dispatch(setIsReady());
+});
 
 ReactDOM.render(
-    <Provider store={createStoreWithMiddleware(reducers)}>
+    <Provider store={store}>
         <Router>
             <RouterToUrlQuery>
                 <App />

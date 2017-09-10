@@ -5,14 +5,14 @@ import { withRouter } from 'react-router';
 
 class Home extends Component {
     componentWillMount() {
-        if (this.props.token && this.props.athlete.firstname === undefined)
+        if (this.props.athlete.firstname === undefined)
             this.props.fetchAthlete(this.props.token);
     }
 
     render() {
         let { athlete } = this.props;
 
-        if (athlete) {
+        if (athlete.firstname) {
             return (
                 <div>
                     <h1>Welcome, {athlete.firstname}.</h1>

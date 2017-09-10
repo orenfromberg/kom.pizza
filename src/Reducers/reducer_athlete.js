@@ -1,5 +1,4 @@
-import { 
-    FETCH_ATHLETE } from '../Actions/index';
+import { FETCH_ATHLETE } from '../Actions/index';
 
 export default (state = {}, action) => {
     switch(action.type) {
