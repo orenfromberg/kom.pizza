@@ -1,18 +1,34 @@
-import React from 'react';
-import ConnectButton from './btn_strava_connectwith_orange.svg';
-const client_id = process.env.REACT_APP_CLIENT_ID;
-const redirect_uri = process.env.REACT_APP_REDIRECT_URI;
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { fetchAthlete } from '../../Actions/index';
+import { withRouter } from 'react-router';
 
-const Home = () => {
-    return (
-        <div>
-            <h1>kom.pizza</h1>
-            <h1><span role="img" aria-label="kom.pizza">👑⛰️.🍕</span></h1>
-            <a href={`https://www.strava.com/oauth/authorize?client_id=${client_id}&response_type=code&redirect_uri=${redirect_uri}&approval_prompt=force`}>
-                <img src={ConnectButton} alt="connect with strava" />
-            </a>
-        </div>
-    )
-}
+class Home extends Component {
+    componentWillMount() {
+        if (this.props.athlete.firstname === undefined)
+            this.props.fetchAthlete(this.props.token);
+    }
 
-export default Home;
+    render() {
+        let { athlete } = this.props;
+
+        if (athlete.firstname) {
+            return (
+                <div>
+                    <h1>Welcome, {athlete.firstname}.</h1>
+                </div>
+            );
+        }
+
+        return (
+            <div />
+        );
+    }
+};
+
+export default withRouter(connect((state) => ({
+    token: state.token,
+    athlete: state.athlete
+}), (dispatch) => ({
+    fetchAthlete: (token) => (dispatch(fetchAthlete(token)))
+}))(Home));
