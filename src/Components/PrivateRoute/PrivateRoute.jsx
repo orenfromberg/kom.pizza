@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect, Route , withRouter } from 'react-router';
 import { connect } from 'react-redux';
-import { Logout } from '../index';
+import { Deauthorize } from '../index';
 
 const PrivateRoute = (props) => {
     const { component: Component, ...rest } = props;
@@ -14,7 +14,7 @@ const PrivateRoute = (props) => {
         <Route {...rest} render={props => (
             isAuthenticated() ? (
                 <div>
-                    <Logout />
+                    <Deauthorize />
                     <Component {...props} />
                 </div>
             ) : (

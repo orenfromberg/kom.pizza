@@ -3,9 +3,9 @@ import axios from 'axios';
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const FETCH_ATHLETE = 'FETCH_ATHLETE';
 export const SET_IS_READY = 'SET_IS_READY';
-export const LOGOUT = 'LOGOUT';
+export const DEAUTHORIZE = 'DEAUTHORIZE';
 
-export const logout = (token) => {
+export const deauthorize = (token) => {
     debugger;
     const request = axios({
         method: 'POST',
@@ -18,7 +18,7 @@ export const logout = (token) => {
     });
 
     return {
-        type: LOGOUT,
+        type: DEAUTHORIZE,
         payload: request
     }
 }
