@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { deauthorize } from '../../Actions/index';
 import {withRouter} from 'react-router';
+import Logo from './api_logo_pwrdBy_strava_horiz_light.svg';
 
 class Deauthorize extends Component {
     constructor(props) {
@@ -17,14 +18,24 @@ class Deauthorize extends Component {
 
     render() {
         return (
-            <button onClick={this.ClickHandler}>Deauthorize</button>        
+            <div>
+                <img src={Logo} style={{
+                    width: '200px',
+                    display: 'block'
+                }} alt="Powered by Strava" />
+                <button style={{
+                    backgroundColor: "#fc4d03",
+                    border: 'none',
+                    outline: 'none',
+                    padding: '10px',
+                    color: '#fff',
+                    fontWeight: 'bold',
+                    margin: '10px'
+                }} onClick={this.ClickHandler}>Deauthorize</button>
+            </div>
         );
     }
 }
-
-// const Deauthorize = (props) => (
-//     <button onClick={}>Deauthorize</button>
-// )
 
 export default withRouter(connect((state) => ({
     token: state.token

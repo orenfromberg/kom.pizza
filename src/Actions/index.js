@@ -6,7 +6,6 @@ export const SET_IS_READY = 'SET_IS_READY';
 export const DEAUTHORIZE = 'DEAUTHORIZE';
 
 export const deauthorize = (token) => {
-    debugger;
     const request = axios({
         method: 'POST',
         url: 'https://www.strava.com/oauth/deauthorize',

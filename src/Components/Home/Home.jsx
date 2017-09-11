@@ -15,6 +15,7 @@ class Home extends Component {
         if (athlete.firstname) {
             return (
                 <div>
+                    <img src={athlete.profile} alt="profile" />
                     <h1>Welcome, {athlete.firstname}.</h1>
                 </div>
             );
