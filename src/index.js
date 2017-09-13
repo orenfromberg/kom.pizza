@@ -15,7 +15,10 @@ import { persistStore, autoRehydrate } from 'redux-persist';
 import { setIsReady } from './Actions/index';
 
 const store = createStore(
-    reducer, 
+    reducer,
+    {
+        token: process.env.REACT_APP_AUTH_TOKEN
+    },
     compose(
         applyMiddleware(ReduxPromise),
         autoRehydrate({
