@@ -2,21 +2,27 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchAthlete } from '../../Actions/index';
 import { withRouter } from 'react-router';
+import { Link } from 'react-router-dom';
 
 class Home extends Component {
     componentWillMount() {
-        if (this.props.athlete.firstname === undefined)
+        if (this.props.athlete === null)
             this.props.fetchAthlete(this.props.token);
     }
 
     render() {
         let { athlete } = this.props;
 
-        if (athlete.firstname) {
+        if (athlete) {
             return (
                 <div>
                     <img src={athlete.profile} alt="profile" />
-                    <h1>Welcome, {athlete.firstname}.</h1>
+                    <h2>Welcome, {athlete.firstname}. Click on the club below for leaderboards.</h2>
+                    {
+                        athlete.clubs.map((club) => {
+                            return <Link to={`/club/${club.id}`}><img src={club.profile} alt={club.name} /></Link>
+                        })
+                    }
                 </div>
             );
         }

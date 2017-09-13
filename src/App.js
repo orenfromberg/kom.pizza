@@ -5,7 +5,7 @@ import {
   withRouter
 } from 'react-router-dom';
 
-import { Home, Authorize, Connect, PrivateRoute } from './Components';
+import { Home, Authorize, Connect, PrivateRoute, Club } from './Components';
 
 class App extends Component {
   render() {
@@ -14,9 +14,9 @@ class App extends Component {
 
     return (
       <div>
-        <h1>kom.pizza</h1>
         <h1><span role="img" aria-label="kom.pizza">👑⛰️.🍕</span></h1>
         <PrivateRoute exact path="/" token={this.props.token} component={Home} />
+        <PrivateRoute path="/club/" token={this.props.token} component={Club} />
         <Route path="/connect" component={Connect} />
         <Route path="/authorize" component={Authorize} />
       </div>

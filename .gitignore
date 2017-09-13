@@ -59,3 +59,6 @@ typings/
 
 # create-react-app
 build/
+
+# vscode
+settings.json

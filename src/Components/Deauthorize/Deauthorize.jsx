@@ -19,10 +19,6 @@ class Deauthorize extends Component {
     render() {
         return (
             <div>
-                <img src={Logo} style={{
-                    width: '200px',
-                    display: 'block'
-                }} alt="Powered by Strava" />
                 <button style={{
                     backgroundColor: "#fc4d03",
                     border: 'none',
@@ -32,6 +28,10 @@ class Deauthorize extends Component {
                     fontWeight: 'bold',
                     margin: '10px'
                 }} onClick={this.ClickHandler}>Deauthorize</button>
+                <img src={Logo} style={{
+                    width: '200px',
+                    display: 'block'
+                }} alt="Powered by Strava" />
             </div>
         );
     }
