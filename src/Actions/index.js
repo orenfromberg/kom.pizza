@@ -2,6 +2,7 @@ import axios from 'axios';
 
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const FETCH_ATHLETE = 'FETCH_ATHLETE';
+export const FETCH_CLUB = 'FETCH_CLUB';
 export const SET_IS_READY = 'SET_IS_READY';
 export const DEAUTHORIZE = 'DEAUTHORIZE';
 
@@ -61,6 +62,23 @@ export const fetchAthlete = (token) => {
 
     return {
         type: FETCH_ATHLETE,
+        payload: request
+    }
+}
+
+export const fetchClub = (token, clubId) => {
+    const request = axios({
+        method: 'GET',
+        url: `https://www.strava.com/api/v3/clubs/${clubId}`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    return {
+        type: FETCH_CLUB,
         payload: request
     }
 }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {
   Route,
-  withRouter
+  withRouter,
+  Link
 } from 'react-router-dom';
 
 import { Home, Authorize, Connect, PrivateRoute, Club } from './Components';
@@ -14,9 +15,9 @@ class App extends Component {
 
     return (
       <div>
-        <h1><span role="img" aria-label="kom.pizza">👑⛰️.🍕</span></h1>
+        <Link style={{textDecoration: 'none', color: 'black'}} to="/"><h1><span role="img" aria-label="kom.pizza">kom.pizza</span></h1></Link>
         <PrivateRoute exact path="/" token={this.props.token} component={Home} />
-        <PrivateRoute path="/club/" token={this.props.token} component={Club} />
+        <PrivateRoute path="/club/:clubId" token={this.props.token} component={Club} />
         <Route path="/connect" component={Connect} />
         <Route path="/authorize" component={Authorize} />
       </div>
@@ -27,4 +28,4 @@ class App extends Component {
 export default withRouter(connect((state) => ({
   token: state.token,
   isReady: state.isReady
-}), null)(App));
+}))(App));
