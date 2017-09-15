@@ -6,15 +6,19 @@ import { withRouter } from 'react-router';
 
 class Club extends Component {
     componentWillMount() {
-        // fetch club
-        this.props.fetchClub(this.props.token, this.props.match.params.clubId);
+        if (!this.props.clubs[this.props.match.params.clubId]) {
+            this.props.fetchClub(this.props.token, this.props.match.params.clubId);
+        }
     }
 
     render() {
-        let { club } = this.props;
+        let { athlete, clubs } = this.props;
 
-        if (club) {
+        let club = clubs[this.props.match.params.clubId];
+
+        if (athlete && club) {
             return <div>
+                <img src={athlete.profile_medium} alt="club profile"/>
                 <h2>{club.name}</h2>
                 <img src={club.profile} alt="club profile"/>
             </div>;
@@ -29,7 +33,8 @@ class Club extends Component {
 
 export default withRouter(connect((state) => ({
     token: state.token,
-    club: state.club,
+    athlete: state.athlete,
+    clubs: state.clubs
 }), (dispatch) => ({
     fetchClub: (token, clubId) => (dispatch(fetchClub(token, clubId)))
 }))(Club));

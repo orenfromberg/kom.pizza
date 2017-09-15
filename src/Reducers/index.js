@@ -1,13 +1,13 @@
 import { combineReducers } from 'redux';
 import TokenReducer from './reducer_token';
 import AthleteReducer from './reducer_athlete';
-import ClubReducer from './reducer_club';
+import ClubsReducer from './reducer_clubs';
 import IsReadyReducer from './reducer_is_ready';
 
 const rootReducer = combineReducers({
     token: TokenReducer,
     athlete: AthleteReducer,
-    club: ClubReducer,
+    clubs: ClubsReducer,
     isReady: IsReadyReducer
 });
 
