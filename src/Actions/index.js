@@ -49,10 +49,10 @@ export const fetchToken = (code) => {
     }
 }
 
-export const fetchAthlete = (token) => {
+export const fetchAthlete = (token, id) => {
     const request = axios({
         method: 'GET',
-        url: 'https://www.strava.com/api/v3/athlete',
+        url: `https://www.strava.com/api/v3/athletes/${id}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
