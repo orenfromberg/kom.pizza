@@ -45,5 +45,5 @@ export default withRouter(connect((state) => ({
     athlete: state.athletes[state.currentAthlete.id],
     clubs: state.clubs
 }), (dispatch) => ({
-    fetchClub: (token, clubId) => (dispatch(fetchClub(token, clubId)))
+    fetchClub: (token, clubId) => dispatch(fetchClub(token, clubId))
 }))(Club));

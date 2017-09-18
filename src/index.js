@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
@@ -20,7 +21,7 @@ const store = createStore(
         token: process.env.REACT_APP_AUTH_TOKEN
     },
     compose(
-        applyMiddleware(ReduxPromise),
+        applyMiddleware(ReduxThunk, ReduxPromise),
         autoRehydrate({
             // log: true
         })
