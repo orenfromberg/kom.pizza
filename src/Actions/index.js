@@ -6,6 +6,9 @@ export const FETCH_CLUB = 'FETCH_CLUB';
 export const SET_IS_READY = 'SET_IS_READY';
 export const DEAUTHORIZE = 'DEAUTHORIZE';
 export const FETCH_CLUB_ACTIVITIES = 'FETCH_CLUB_ACTIVITIES';
+export const SET_IS_FETCHING_ACTIVITIES = 'SET_IS_FETCHING_ACTIVITIES';
+export const CACHE_CLUB_ACTIVITIES = 'CACHE_CLUB_ACTIVITIES';
+export const FETCH_CURRENT_ATHLETE = 'FETCH_CURRENT_ATHLETE';
 
 export const deauthorize = (token) => {
     const request = axios({
@@ -67,6 +70,23 @@ export const fetchAthlete = (token, id) => {
     }
 }
 
+export const fetchCurrentAthlete = (token) => {
+    const request = axios({
+        method: 'GET',
+        url: 'https://www.strava.com/api/v3/athlete',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    });
+
+    return {
+        type: FETCH_CURRENT_ATHLETE,
+        payload: request
+    };
+}
+
 export const fetchClub = (token, clubId) => {
     const request = axios({
         method: 'GET',
@@ -84,30 +104,32 @@ export const fetchClub = (token, clubId) => {
     }
 }
 
-export const fetchClubActivities = (token, id) => {
-    // const request = axios({
-    //     method: 'GET',
-    //     url: `https://www.strava.com/api/v3/clubs/${id}/activities`,
-    //     headers: {
-    //         'Accept': 'application/json',
-    //         'Content-Type': 'application/json',
-    //         'Authorization': `Bearer ${token}`
-    //     }
-    // }).then((response) => {
-    //     return response;
-    // });
+export const cacheClubActivities = (clubId, activities) => {
+    return {
+        type: CACHE_CLUB_ACTIVITIES,
+        payload: {
+            clubId,
+            activities
+        }
+    }
+}
 
-    // return {
-    //     type: FETCH_CLUB_ACTIVITIES,
-    //     payload: request
-    // }
-    return fetchClubActivitiesByPage(token, id, 1, 10);
-};
+export const setIsFetchingActivities = (value) => {
+    return {
+        type: SET_IS_FETCHING_ACTIVITIES,
+        payload: value
+    }
+}
 
-const fetchClubActivitiesByPage = (token, id, page, per_page) => (dispatch) => {
+export const fetchClubActivities = (token, clubId) => (dispatch) => {
+    dispatch(setIsFetchingActivities(true));
+    dispatch(fetchClubActivitiesByPage(token, clubId, 1, 200));
+}
+
+const fetchClubActivitiesByPage = (token, clubId, page, per_page) => (dispatch) => {
     return axios({
         method: 'GET',
-        url: `https://www.strava.com/api/v3/clubs/${id}/activities?per_page=${per_page}&page=${page}`,
+        url: `https://www.strava.com/api/v3/clubs/${clubId}/activities?per_page=${per_page}&page=${page}`,
         headers: {
             'Accept': 'application/json',
             'Content-Type': 'application/json',
@@ -115,36 +137,14 @@ const fetchClubActivitiesByPage = (token, id, page, per_page) => (dispatch) => {
         }
     })
     .then((response) => {
-        debugger;
-        // check to see if we got data back. 
-        // If so, that means there is more.
-        if (response.data.length > 0) {
-            // dispatch({
-            //     type: CACHE_CLUB_ACTIVITIES,
-            //     payload: response.data
-            // })
-            dispatch(fetchClubActivitiesByPage(token, id, page + 1, per_page));
+        if (response.data && response.data.length > 0) {
+            dispatch(cacheClubActivities(clubId, response.data));
+            dispatch(fetchClubActivitiesByPage(token, clubId, page + 1, per_page));                
+        } else {
+            dispatch(setIsFetchingActivities(false));
         }
-        // else there is no more data and we are done.
+    })
+    .catch((error) => {
+        console.error(error);
     })
 }
-
-// export const fetchClubActivitiesForCurrentMonth = (token, id) => {
-//     return (
-//         (dispatch) => {
-//             return fetchClubActivitiesByPage(token, id, 1, 200)
-//             .then((response) => {
-//                 if (response.length > 0) {
-//                     dispatch({
-//                         type: CACHE_CLUB_ACTIVITIES,
-//                         payload: response.body.data
-//                     });
-//                     dispatch()    
-//                 } else {
-
-//                 }
-
-//             })
-//         }
-//     );
-// }

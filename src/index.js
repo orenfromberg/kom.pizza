@@ -15,12 +15,13 @@ import './index.css';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { setIsReady } from './Actions/index';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     reducer,
     {
         token: process.env.REACT_APP_AUTH_TOKEN
     },
-    compose(
+    composeEnhancers(
         applyMiddleware(ReduxThunk, ReduxPromise),
         autoRehydrate({
             // log: true

@@ -8,15 +8,15 @@ class Leaderboard extends Component {
         const { fetchClubActivities, token, match } = this.props;
 
         fetchClubActivities(token, match.params.clubId);
-
-        // fetchClubActivitiesForCurrentWeek(token, match.param.clubId);
-        // fetchClubActivitiesForCurrentMonth(token, match.param.clubId);
-        // fetchClubActivitiesForCurrentYear(token, match.param.clubId);
     }
 
     render() {
+        const { isFetchingActivities } = this.props;
+        
         return (
-            <div />
+            <div>
+                {isFetchingActivities && <h1>LOADING...</h1>}
+            </div>
         );
 
     }
@@ -24,9 +24,7 @@ class Leaderboard extends Component {
 
 export default withRouter(connect((state) => ({
     token: state.token,
-    // athlete: state.athletes[state.currentAthlete.id],
-    // clubs: state.clubs
+    isFetchingActivities: state.isFetchingActivities,
 }), (dispatch) => ({
-    // fetchClub: (token, clubId) => dispatch(fetchClub(token, clubId))
     fetchClubActivities: (token, id) => dispatch(fetchClubActivities(token, id))
 }))(Leaderboard));
