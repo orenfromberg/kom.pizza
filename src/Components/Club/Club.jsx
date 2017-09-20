@@ -21,13 +21,13 @@ class Club extends Component {
     }
 
     render() {
-        let { athlete, clubs, match } = this.props;
+        let { currentAthlete, clubs, match } = this.props;
 
         let club = clubs[match.params.clubId];
 
-        if (athlete && club) {
+        if (currentAthlete && club) {
             return <div>
-                <img src={athlete.profile_medium} alt="club profile"/>
+                <img src={currentAthlete.profile_medium} alt="club profile"/>
                 <h2>{club.name}</h2>
                 <img src={club.profile} alt="club profile"/>
             </div>;
@@ -42,8 +42,8 @@ class Club extends Component {
 
 export default withRouter(connect((state) => ({
     token: state.token,
-    athlete: state.athletes[state.currentAthlete.id],
+    currentAthlete: state.currentAthlete,
     clubs: state.clubs
 }), (dispatch) => ({
-    fetchClub: (token, clubId) => (dispatch(fetchClub(token, clubId)))
+    fetchClub: (token, clubId) => dispatch(fetchClub(token, clubId))
 }))(Club));

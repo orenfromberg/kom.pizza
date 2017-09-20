@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import ReduxThunk from 'redux-thunk';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware, compose } from 'redux';
 import ReduxPromise from 'redux-promise';
@@ -14,13 +15,14 @@ import './index.css';
 import { persistStore, autoRehydrate } from 'redux-persist';
 import { setIsReady } from './Actions/index';
 
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 const store = createStore(
     reducer,
     {
         token: process.env.REACT_APP_AUTH_TOKEN
     },
-    compose(
-        applyMiddleware(ReduxPromise),
+    composeEnhancers(
+        applyMiddleware(ReduxThunk, ReduxPromise),
         autoRehydrate({
             // log: true
         })

@@ -6,7 +6,14 @@ import {
   Link
 } from 'react-router-dom';
 
-import { Home, Authorize, Connect, PrivateRoute, Club } from './Components';
+import {
+  Home,
+  Authorize,
+  Connect,
+  PrivateRoute,
+  Leaderboard,
+  Club
+} from './Components';
 
 class App extends Component {
   render() {
@@ -18,6 +25,7 @@ class App extends Component {
         <Link style={{textDecoration: 'none', color: 'black'}} to="/"><h1><span role="img" aria-label="kom.pizza">kom.pizza</span></h1></Link>
         <PrivateRoute exact path="/" token={this.props.token} component={Home} />
         <PrivateRoute path="/club/:clubId" token={this.props.token} component={Club} />
+        <PrivateRoute path="/leaderboard/:clubId" token={this.props.token} component={Leaderboard} />
         <Route path="/connect" component={Connect} />
         <Route path="/authorize" component={Authorize} />
       </div>
