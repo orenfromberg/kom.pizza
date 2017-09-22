@@ -1,4 +1,4 @@
-import { CACHE_CLUB_ACTIVITIES } from '../Actions/index';
+import { CACHE_CLUB_ACTIVITIES } from '../Actions';
 
 export default (state = {}, action) => {
     switch(action.type) {

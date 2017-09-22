@@ -1,4 +1,4 @@
-import { FETCH_TOKEN, DEAUTHORIZE } from '../Actions/index';
+import { FETCH_TOKEN, DEAUTHORIZE } from '../Actions';
 import { REHYDRATE } from 'redux-persist/constants';
 
 export default (state = null, action) => {

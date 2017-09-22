@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { addUrlProps, UrlQueryParamTypes } from 'react-url-query';
-import { fetchToken } from '../../Actions/index';
+import { fetchToken } from '../../Actions';
 import { Redirect, withRouter } from 'react-router-dom';
 
 const urlPropsQueryConfig = {

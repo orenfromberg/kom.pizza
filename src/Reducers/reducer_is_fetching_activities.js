@@ -1,4 +1,4 @@
-import { SET_IS_FETCHING_ACTIVITIES } from '../Actions/index';
+import { SET_IS_FETCHING_ACTIVITIES } from '../Actions';
 
 export default (state = false, action) => {
     switch(action.type) {

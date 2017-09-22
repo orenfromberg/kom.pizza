@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
-import { fetchClubActivities } from '../../Actions/index';
+import { fetchClubActivities } from '../../Actions';
 
 class Leaderboard extends Component {
     componentWillMount() {

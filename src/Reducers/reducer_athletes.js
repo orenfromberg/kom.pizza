@@ -1,4 +1,4 @@
-import { FETCH_ATHLETE } from '../Actions/index';
+import { FETCH_ATHLETE } from '../Actions';
 import { handleMissingProfileLarge, handleMissingProfileMedium } from './profile';
 
 export default (state = [], action) => {

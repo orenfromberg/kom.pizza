@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { deauthorize } from '../../Actions/index';
-import {withRouter} from 'react-router';
+import { deauthorize } from '../../Actions';
+import { withRouter } from 'react-router';
 import Logo from './api_logo_pwrdBy_strava_horiz_light.svg';
+import { PrimaryButton } from '../index';
 
 class Deauthorize extends Component {
     constructor(props) {
@@ -19,15 +20,7 @@ class Deauthorize extends Component {
     render() {
         return (
             <div>
-                <button style={{
-                    backgroundColor: "#fc4d03",
-                    border: 'none',
-                    outline: 'none',
-                    padding: '10px',
-                    color: '#fff',
-                    fontWeight: 'bold',
-                    margin: '10px'
-                }} onClick={this.ClickHandler}>Deauthorize</button>
+                <PrimaryButton onClick={(e) => this.ClickHandler(e)} text="Deauthorize" />
                 <img src={Logo} style={{
                     width: '200px',
                     display: 'block'

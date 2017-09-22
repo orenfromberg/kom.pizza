@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchCurrentAthlete } from '../../Actions/index';
+import { fetchCurrentAthlete } from '../../Actions';
 import { withRouter } from 'react-router';
 import { Link } from 'react-router-dom';
 
 const profileStyle = {
-    borderTopLeftRadius: '100%',
-    borderTopRightRadius: '100%',
-    borderBottomLeftRadius: '100%',
-    borderBottomRightRadius: '100%',
+    borderRadius: '100%'
 };
 
 class Home extends Component {

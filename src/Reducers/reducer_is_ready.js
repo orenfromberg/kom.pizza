@@ -1,4 +1,4 @@
-import { SET_IS_READY } from '../Actions/index';
+import { SET_IS_READY } from '../Actions';
 
 export default (state = false, action) => {
     switch(action.type) {

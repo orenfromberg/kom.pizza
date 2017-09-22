@@ -1,4 +1,4 @@
-import { FETCH_CLUB } from '../Actions/index';
+import { FETCH_CLUB } from '../Actions';
 
 export default (state = [], action) => {
     switch(action.type) {

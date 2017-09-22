@@ -1,10 +1,21 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchClub } from '../../Actions/index';
+import { fetchClub } from '../../Actions';
 import { withRouter } from 'react-router';
-// import { Link } from 'react-router-dom';
+import { PrimaryButton } from '../index';
 
 class Club extends Component {
+    constructor(props) {
+        super(props);
+
+        this.onClick = this.onClick.bind(this);
+    }
+
+    onClick(e) {
+        e.preventDefault();
+        this.props.history.push(`/leaderboard/${this.props.match.params.clubId}`)
+    }
+
     componentWillMount() {
         const {
             clubs,
@@ -25,16 +36,18 @@ class Club extends Component {
 
         let club = clubs[match.params.clubId];
 
-        if (currentAthlete && club) {
-            return <div>
-                <img src={currentAthlete.profile_medium} alt="club profile"/>
-                <h2>{club.name}</h2>
-                <img src={club.profile} alt="club profile"/>
-            </div>;
-        }
-
         return (
-            <div />
+            <div>
+                {
+                    currentAthlete && club && 
+                    <div>
+                        <img src={currentAthlete.profile_medium} alt="club profile"/>
+                        <h2>{club.name}</h2>
+                        <img src={club.profile} alt="club profile"/>
+                        <PrimaryButton onClick={(e) => this.onClick(e)}text="View Leaderboard" />
+                    </div>
+                }
+            </div>
         );
 
     }

@@ -1,10 +1,11 @@
-import Home from './Home/Home';
-import Authorize from './Authorize/Authorize';
-import Connect from './Connect/Connect';
-import PrivateRoute from './PrivateRoute/PrivateRoute';
-import Deauthorize from './Deauthorize/Deauthorize';
-import Club from './Club/Club';
-import Leaderboard from './Leaderboard/Leaderboard';
+import Home from './Home';
+import Authorize from './Authorize';
+import Connect from './Connect';
+import PrivateRoute from './PrivateRoute';
+import Deauthorize from './Deauthorize';
+import Club from './Club';
+import Leaderboard from './Leaderboard';
+import PrimaryButton from './PrimaryButton';
 
 export {
     Home,
@@ -13,5 +14,6 @@ export {
     Leaderboard,
     Connect,
     Deauthorize,
-    PrivateRoute
+    PrivateRoute,
+    PrimaryButton
 }
