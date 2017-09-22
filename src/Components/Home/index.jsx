@@ -28,7 +28,7 @@ class Home extends Component {
             return (
                 <div>
                     <img className="profile" style={profileStyle} src={currentAthlete.profile} alt="profile" />
-                    <h2>Welcome, {currentAthlete.firstname}. Click on the club below for leaderboards.</h2>
+                    <h2>Welcome, {currentAthlete.firstname}. Please select a club below:</h2>
                     {
                         currentAthlete.clubs.map((club) => {
                             return <Link to={`/club/${club.id}`} key={club.id}><img src={club.profile_medium} alt={club.name} /></Link>

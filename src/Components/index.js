@@ -6,6 +6,7 @@ import Deauthorize from './Deauthorize';
 import Club from './Club';
 import Leaderboard from './Leaderboard';
 import PrimaryButton from './PrimaryButton';
+import RosterList from './RosterList';
 
 export {
     Home,
@@ -15,5 +16,6 @@ export {
     Connect,
     Deauthorize,
     PrivateRoute,
-    PrimaryButton
+    PrimaryButton,
+    RosterList
 }

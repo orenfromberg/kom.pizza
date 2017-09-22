@@ -17,12 +17,9 @@ import {
 
 class App extends Component {
   render() {
-    if (!this.props.isReady)
-      return <div />;
-
-    return (
+    return (this.props.isReady &&
       <div>
-        <Link style={{textDecoration: 'none', color: 'black'}} to="/"><h1><span role="img" aria-label="kom.pizza">kom.pizza</span></h1></Link>
+        <Link style={{textDecoration: 'none', color: 'black'}} to="/"><h1><span role="img" aria-label="kom.pizza">kom.pizza with your friendza!</span></h1></Link>
         <PrivateRoute exact path="/" token={this.props.token} component={Home} />
         <PrivateRoute path="/club/:clubId" token={this.props.token} component={Club} />
         <PrivateRoute path="/leaderboard/:clubId" token={this.props.token} component={Leaderboard} />

@@ -3,11 +3,13 @@ import axios from 'axios';
 export const FETCH_TOKEN = 'FETCH_TOKEN';
 export const FETCH_ATHLETE = 'FETCH_ATHLETE';
 export const FETCH_CLUB = 'FETCH_CLUB';
+export const FETCH_ROSTER = 'FETCH_ROSTER';
 export const SET_IS_READY = 'SET_IS_READY';
 export const DEAUTHORIZE = 'DEAUTHORIZE';
 export const FETCH_CLUB_ACTIVITIES = 'FETCH_CLUB_ACTIVITIES';
 export const SET_IS_FETCHING_ACTIVITIES = 'SET_IS_FETCHING_ACTIVITIES';
 export const CACHE_CLUB_ACTIVITIES = 'CACHE_CLUB_ACTIVITIES';
+export const CACHE_CLUB_MEMBERS = 'CACHE_CLUB_MEMBERS';
 export const FETCH_CURRENT_ATHLETE = 'FETCH_CURRENT_ATHLETE';
 
 export const deauthorize = (token) => {
@@ -101,6 +103,53 @@ export const fetchClub = (token, clubId) => {
     return {
         type: FETCH_CLUB,
         payload: request
+    }
+}
+
+export const fetchRoster = (token, clubId) => {
+    const request = axios({
+        method: 'GET',
+        url: `https://www.strava.com/api/v3/clubs/${clubId}/members`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+
+    return {
+        type: FETCH_ROSTER,
+        payload: request
+    }
+}
+
+export const fetchClubMembers = (token, clubId) => (dispatch) => {
+    return axios({
+        method: 'GET',
+        url: `https://www.strava.com/api/v3/clubs/${clubId}/members`,
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
+    })
+    .then(({ data }) => {
+        if (data && data.length > 0) {
+            dispatch(cacheClubMembers(clubId, data));
+        }
+    })
+    .catch((error) => {
+        console.error(error);
+    })
+}
+
+const cacheClubMembers = (clubId, members) => {
+    return {
+        type: CACHE_CLUB_MEMBERS,
+        payload: {
+            clubId,
+            members
+        }
     }
 }
 
