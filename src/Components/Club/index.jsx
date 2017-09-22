@@ -8,10 +8,10 @@ class Club extends Component {
     constructor(props) {
         super(props);
 
-        this.onClick = this.onClick.bind(this);
+        this.onClickViewLeaderboard = this.onClickViewLeaderboard.bind(this);
     }
 
-    onClick(e) {
+    onClickViewLeaderboard(e) {
         e.preventDefault();
         this.props.history.push(`/leaderboard/${this.props.match.params.clubId}`)
     }
@@ -63,7 +63,7 @@ class Club extends Component {
                         {
                             roster && <RosterList members={roster} />
                         }
-                        <PrimaryButton onClick={(e) => this.onClick(e)}text="View Leaderboard" />
+                        <PrimaryButton onClick={(e) => this.onClickViewLeaderboard(e)}text="View Leaderboard" />
                     </div>
                 }
             </div>
