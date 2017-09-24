@@ -4,7 +4,7 @@ import CurrentAthleteReducer from './reducer_current_athlete';
 import AthletesReducer from './reducer_athletes';
 import ClubsReducer from './reducer_clubs';
 import IsReadyReducer from './reducer_is_ready';
-import IsFetchingActivitiesReducer from './reducer_is_fetching_activities';
+import IsFetchingReducer from './reducer_is_fetching';
 import ActivitiesByClubReducer from './reducer_activities_by_club';
 import ActivitiesReducer from './reducer_activities';
 import MembersByClubReducer from './reducer_members_by_club';
@@ -15,7 +15,7 @@ const rootReducer = combineReducers({
     athletes: AthletesReducer,
     clubs: ClubsReducer,
     isReady: IsReadyReducer,
-    isFetchingActivities: IsFetchingActivitiesReducer,
+    isFetching: IsFetchingReducer,
     activitiesByClub: ActivitiesByClubReducer,
     activities: ActivitiesReducer,
     membersByClub: MembersByClubReducer,

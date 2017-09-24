@@ -7,7 +7,7 @@ const RosterList = (props) => {
         {
             props.members.map((member) => {
                 return (
-                    <a key={member.id} href={`https://www.strava.com/athletes/${member.id}`}>
+                    <a key={member.id} target="_blank" href={`https://www.strava.com/athletes/${member.id}`}>
                         <img className="profile-medium" src={member.profile_medium} alt="profile"/>
                     </a>
                 );

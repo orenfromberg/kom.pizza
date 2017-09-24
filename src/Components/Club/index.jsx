@@ -43,7 +43,7 @@ class Club extends Component {
             clubs, 
             membersByClub, 
             match, 
-            athletes
+            athletes,
         } = this.props;
 
         let club = clubs[match.params.clubId];
@@ -77,7 +77,7 @@ export default withRouter(connect((state) => ({
     currentAthlete: state.currentAthlete,
     clubs: state.clubs,
     athletes: state.athletes,
-    membersByClub: state.membersByClub
+    membersByClub: state.membersByClub,
 }), (dispatch) => ({
     fetchClub: (token, clubId) => dispatch(fetchClub(token, clubId)),
     fetchClubMembers: (token, clubId) => dispatch(fetchClubMembers(token, clubId))

@@ -33,7 +33,6 @@ class Leaderboard extends Component {
 
     render() {
         const { 
-            isFetchingActivities, 
             clubs,
             match, 
             activitiesByClub, 
@@ -56,10 +55,6 @@ class Leaderboard extends Component {
 
         return (
             <div>
-                { 
-                    isFetchingActivities && 
-                    <h1>LOADING...</h1>
-                }
                 {
                     leaderboard && clubs && club &&
                     <div>
@@ -93,7 +88,6 @@ class Leaderboard extends Component {
 export default withRouter(connect((state) => ({
     token: state.token,
     clubs: state.clubs,
-    isFetchingActivities: state.isFetchingActivities,
     activitiesByClub: state.activitiesByClub,
     activities: state.activities
 }), (dispatch) => ({
