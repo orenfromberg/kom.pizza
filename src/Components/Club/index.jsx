@@ -60,10 +60,10 @@ class Club extends Component {
                         <img src={currentAthlete.profile_medium} alt="club profile"/>
                         <h2>{club.name}</h2>
                         <img src={club.profile} alt="club profile"/>
+                        <PrimaryButton onClick={(e) => this.onClickViewLeaderboard(e)}text="View Leaderboard" />
                         {
                             roster && <RosterList members={roster} />
                         }
-                        <PrimaryButton onClick={(e) => this.onClickViewLeaderboard(e)}text="View Leaderboard" />
                     </div>
                 }
             </div>

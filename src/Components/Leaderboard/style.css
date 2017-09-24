@@ -1,0 +1,7 @@
+thead tr td {
+    font-weight: bold;
+}
+
+tr {
+    outline-style: dashed;
+}
