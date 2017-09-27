@@ -5,3 +5,7 @@ thead tr td {
 tr {
     outline-style: dashed;
 }
+
+td {
+    border-left: dashed;
+}

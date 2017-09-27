@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { withRouter } from 'react-router';
+import Humanize from 'humanize-plus';
 import { fetchClub, fetchClubActivities } from '../../Actions';
 import {
     getLeaderboard,
@@ -49,7 +50,7 @@ class Leaderboard extends Component {
 
             leaderboard = getLeaderboard(
                 clubActivities, 
-                Filters.currentMonthlyDistanceOfType('Ride'),
+                Filters.currentMonthlyBikingDistance,
                 Sorts.sortByDistanceHighToLow);
             }
 
@@ -64,16 +65,28 @@ class Leaderboard extends Component {
                                 <tr>
                                     <td>Place</td>
                                     <td>Athlete</td>
-                                    <td>Distance</td>
+                                    <td>Distance (mi)</td>
+                                    <td>Total Elevation Gain (ft)</td>
+                                    <td>Elevation per Mile (ft/mi)</td>
                                 </tr>
                             </thead>
                             <tbody>
                             {
-                                leaderboard.map((entry, index) => (<tr key={entry.athlete.id}>
-                                    <td>{`${index + 1}`}</td>
-                                    <td><img className="profile-medium" src={entry.athlete.profile_medium} alt="profile medium" />{`${entry.athlete.firstname} ${entry.athlete.lastname}`}</td>
-                                    <td>{entry.distance}</td>
-                                    </tr>))
+                                leaderboard.map((entry, index) => {
+                                    return (
+                                        <tr key={entry.athlete.id}>
+                                            <td>{`${index + 1}`}</td>
+                                            <td>
+                                                <a target="_blank" href={`https://www.strava.com/athletes/${entry.athlete.id}`}>
+                                                    <img className="profile-medium" src={entry.athlete.profile_medium} alt="profile medium" />{`${entry.athlete.firstname} ${entry.athlete.lastname}`}
+                                                </a>
+                                            </td>
+                                            <td>{Humanize.formatNumber(entry.distanceInMiles, 2)}</td>
+                                            <td>{Humanize.formatNumber(entry.elevationInFeet, 2)}</td>
+                                            <td>{Humanize.formatNumber(entry.elevationOverDistance, 2)}</td>
+                                        </tr>
+                                    )
+                                })
                             }
                             </tbody>
                         </table>

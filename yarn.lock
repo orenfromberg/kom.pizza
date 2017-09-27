@@ -5830,8 +5830,8 @@ sshpk@^1.7.0:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.3.1.tgz#faf51b9eb74aaef3b3acf4ad5f61abf24cb7b93e"
 
 strava-leaderboard@^1.0.1:
-  version "1.0.1"
-  resolved "https://registry.yarnpkg.com/strava-leaderboard/-/strava-leaderboard-1.0.1.tgz#080da65a07544a21b98c25b2320e2d70f9faa948"
+  version "1.0.2"
+  resolved "https://registry.yarnpkg.com/strava-leaderboard/-/strava-leaderboard-1.0.2.tgz#ae8abeb66b8820fec12b705538ee61ac954c21a8"
   dependencies:
     humanize-plus "^1.8.2"
 
